@@ -32,26 +32,42 @@ type Orderprop = {
 };
 
 export const processPayment = async ({ amount, currency, cart }: Prop) => {
-  const user = await auth();
-  if (!user) return { error: "You need to logged in First!" };
-  if (!amount) return { error: "No products in your cart!" };
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount,
-    currency,
-    automatic_payment_methods: {
-      enabled: true,
-    },
-    metadata: {
-      cart: JSON.stringify(cart),
-    },
-  });
-  return {
-    success: {
-      paymentIntentId: paymentIntent.id,
-      clientSecretId: paymentIntent.client_secret,
-      user_email: user.user?.email,
-    },
-  };
+  try {
+    const user = await auth();
+
+    console.log("USER =>", user?.user?.email);
+    console.log("AMOUNT =>", amount);
+    console.log("STRIPE KEY EXISTS =>", !!process.env.STRIPE_SECRET_KEY);
+
+    if (!user) {
+      return { error: "You need to logged in First!" };
+    }
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(amount),
+      currency,
+      automatic_payment_methods: {
+        enabled: true,
+      },
+      metadata: {
+        cart: JSON.stringify(cart),
+      },
+    });
+
+    return {
+      success: {
+        paymentIntentId: paymentIntent.id,
+        clientSecretId: paymentIntent.client_secret,
+        user_email: user.user?.email,
+      },
+    };
+  } catch (error) {
+    console.log("PAYMENT ERROR =>", error);
+
+    return {
+      error: error instanceof Error ? error.message : "Payment Failed",
+    };
+  }
 };
 
 export const orderAdd = async ({ totalprice, status, products }: Orderprop) => {
