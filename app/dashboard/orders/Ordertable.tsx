@@ -147,7 +147,7 @@ export function Ordertable({ orders, userEmail }: Prop) {
                     <DialogHeader>
                       <DialogTitle>Order details</DialogTitle>
                       <DialogDescription>
-                        Buyer's name : {item.user.name}
+                        Buyer's name : {item.user?.name}
                       </DialogDescription>
                       <DialogDescription>
                         Order's total price : {item.total.toLocaleString()} MMK
