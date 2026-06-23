@@ -50,7 +50,7 @@ export const processPayment = async ({ amount, currency, cart }: Prop) => {
         enabled: true,
       },
       metadata: {
-        cart: JSON.stringify(cart),
+        cart: cart.map((c) => c.id).join(","),
       },
     });
 

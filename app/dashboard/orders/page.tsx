@@ -1,6 +1,6 @@
 import { db } from "@/sever";
 import { Ordertable } from "./Ordertable";
-import { asc, eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { auth } from "@/sever/auth";
 import { orders } from "@/sever/schema";
 
@@ -21,7 +21,7 @@ const Orderpage = async () => {
               },
             },
           },
-          orderBy: [asc(orders.id)],
+          orderBy: [desc(orders.id)],
         })
       : await db.query.orders.findMany({
           where: eq(orders.userID, user?.user?.id!),
@@ -36,7 +36,7 @@ const Orderpage = async () => {
               },
             },
           },
-          orderBy: [asc(orders.id)],
+          orderBy: [desc(orders.id)],
         });
   return <Ordertable orders={res} userEmail={user?.user?.email!} />;
 };
