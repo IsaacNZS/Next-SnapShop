@@ -20,12 +20,12 @@ const Navcom = ({ user }: Session) => {
           <div className="flex flex-col justify-center gap-1 text-green-500">
             <Link
               href={"/"}
-              className="text-xl md:text-2xl lg:text-2xl font-bold"
+              className="text-lg md:text-2xl lg:text-2xl font-bold"
             >
               Snap-Shop
             </Link>
           </div>
-          <i className="fa-brands text-2xl md:text-3xl lg:text-3xl  text-green-500 fa-shopify"></i>
+          <i className="fa-brands text-xl md:text-3xl lg:text-3xl  text-green-500 fa-shopify"></i>
         </div>
         <div className="flex items-center gap-2">
           <DrawerinCart />
@@ -33,14 +33,14 @@ const Navcom = ({ user }: Session) => {
             className="text-[12px] border px-3 py-1 font-bold rounded-[5px] text-green-500"
             href={user ? "/dashboard/orders" : "/register/"}
           >
-            {user ? "Orders" : "Register"}
+            {user ? "Orders" : "Signup"}
           </Link>
           {!user ? (
             <Link
               className="text-[12px] bg-green-400 px-3 py-1 font-bold rounded-[5px] text-white"
               href={"/login/"}
             >
-              <i className="fa-solid fa-arrow-right-to-bracket"></i> Login
+              <i className="fa-solid fa-arrow-right-to-bracket"></i> Signin
             </Link>
           ) : (
             <button onClick={() => setIsOpen(!isOpen)}>
