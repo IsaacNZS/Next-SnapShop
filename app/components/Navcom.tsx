@@ -10,6 +10,7 @@ import DrawerinCart from "../product/[id]/DrawerinCart";
 const Navcom = ({ user }: Session) => {
   const [isOpen, setIsOpen] = useState(false);
   const route = useRouter();
+
   return (
     <div className="flex z-50 mb-3 px-3 py-2 rounded-[10px] shadow-xl flex-col w-full">
       <div className="flex items-center relative justify-between">
@@ -27,7 +28,7 @@ const Navcom = ({ user }: Session) => {
           <i className="fa-brands text-2xl md:text-3xl lg:text-3xl  text-green-500 fa-shopify"></i>
         </div>
         <div className="flex items-center gap-2">
-          {user && <DrawerinCart />}
+          <DrawerinCart />
           <Link
             className="text-[12px] border px-3 py-1 font-bold rounded-[5px] text-green-500"
             href={user ? "/dashboard/orders" : "/register/"}
@@ -43,7 +44,19 @@ const Navcom = ({ user }: Session) => {
             </Link>
           ) : (
             <button onClick={() => setIsOpen(!isOpen)}>
-              <i className="fa-solid fa-circle-user relative text-3xl text-green-800"></i>
+              {user.image ? (
+                <div className="border-2 border-green-500 rounded-full">
+                  <Image
+                    src={user?.image ? user.image : "/profile.png"}
+                    alt="Picture of the author"
+                    width={50}
+                    height={50}
+                    className="rounded-full w-10 h-10 border-white border-2"
+                  />
+                </div>
+              ) : (
+                <i className="fa-solid fa-circle-user relative text-3xl text-green-800"></i>
+              )}
             </button>
           )}{" "}
         </div>
@@ -55,11 +68,11 @@ const Navcom = ({ user }: Session) => {
               <div className="flex items-center gap-2">
                 {" "}
                 <Image
-                  src="/profile.png"
+                  src={user?.image ? user.image : "/profile.png"}
                   alt="Picture of the author"
-                  width={40}
-                  height={40}
-                  className="rounded-full border-white border-2"
+                  width={50}
+                  height={50}
+                  className="rounded-full w-13 h-13 border-white border-2"
                 />{" "}
                 Account Infomation
               </div>

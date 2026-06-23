@@ -6,8 +6,9 @@ import { Toaster } from "sonner";
 import Navcom from "./components/Navcom";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Snap-Shop",
@@ -23,10 +24,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
       <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="min-h-full w-full flex flex-col">
         <SessionProvider>

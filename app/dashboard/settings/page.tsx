@@ -145,7 +145,7 @@ const page = () => {
           alt="Picture of the author"
           width={50}
           height={50}
-          className="rounded-full w-auto h-auto"
+          className="rounded-full w-13 h-13"
         />
         <form onSubmit={handleSubmit}>
           <label
